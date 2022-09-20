@@ -12,8 +12,6 @@ if (PHP_OS == 'Linux') {
         $pid = $_GET['pid'];
         $cmd = shell_exec('/usr/bin/top -p ' . $pid . ' -b -n1');
     }
-
-
     $cmd = str_replace("      ", " ", $cmd);
     $cmd = str_replace("     ", " ", $cmd);
     $cmd = str_replace("    ", " ", $cmd);
@@ -39,17 +37,16 @@ if (PHP_OS == 'WINNT') {
         $pid = $_GET['pid'];
         $cmd .= '/FI "PID eq ' . $pid . '"';
     }
-    //get the memory info of a Ubuntu machine
     exec($cmd, $output, $resultCode);
-    // echo "Returned with status $resultCode and output:\n";
-    // $output = str_replace("      ", " ", $output);
     echo "<pre>";
     echo "<form><input type='number' name='pid' /> <input type='submit'></form>";
-    // $output = json_encode($output);
     for ($i = 0; $i < sizeof($output); $i++) {
+        if ($i == 2) {
+            $output[$i] = str_replace('=', " ", $output[$i]);
+        }
         echo $output[$i];
+
         echo "<br>";
     }
-    // print_r(json_encode($output));
     echo "</pre>";
 }
