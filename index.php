@@ -1,10 +1,5 @@
 <?php
 
-
-
-
-
-
 if (PHP_OS == 'Linux') {
     echo "<center>";
     $cmd = shell_exec('/usr/bin/top -b -n1');
@@ -22,7 +17,7 @@ if (PHP_OS == 'Linux') {
     $cmd = str_replace("<tr><td></td><td>", "<tr><td>", $cmd);
     $cmd = str_replace("<tr><td>PID", "<tr><td COLSPAN=10 height=50></td></tr><tr bgcolor=e0e0e0><td>PID", $cmd);
 
-
+    echo "<form>Please Enter Process ID to see details: <input type='number' name='pid' /> <input type='submit'></form>";
     echo '<table width=900 align=middle border=0><tr><td>';
     echo $cmd;
     echo '</td></tr></table>';
